@@ -170,6 +170,18 @@ STYLESHEET = f"""
     font-weight: 500;
 }}
 
+/* ── Exclude native file/folder dialogs from custom styling (macOS fix) ── */
+
+QFileDialog * {{
+    font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+    font-size: 13pt;
+    color: initial;
+    background-color: initial;
+    border: initial;
+    padding: initial;
+    font-weight: initial;
+}}
+
 QMainWindow {{
     background-color: {P['bg']};
     border: 1px solid {P['border']};
@@ -535,6 +547,10 @@ QToolButton {{
     font-weight: 600;
 }}
 
+QToolButton::menu-indicator {{
+    image: none;
+}}
+
 QToolButton:hover {{
     border: 1px solid {P['accent']};
     color: {P['accent']};
@@ -549,11 +565,11 @@ QMenu {{
     background-color: {P['panelRaised']};
     border: 1px solid {P['border']};
     border-radius: 8px;
-    padding: 6px 4px;
+    padding: 4px 4px;
 }}
 
 QMenu::item {{
-    padding: 8px 24px 8px 14px;
+    padding: 6px 20px 6px 12px;
     color: {P['text']};
     font-weight: 500;
     border-radius: 5px;
