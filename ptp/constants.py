@@ -174,3 +174,20 @@ def resp_name(code: int) -> str:
         if getattr(PTPResp, name) == code:
             return name
     return f'0x{code:04X}'
+
+# Per-model property skip list for write_preset_slot.
+# Property IDs listed here are silently skipped when writing to that camera.
+CAMERA_SKIP_PROPS: dict[str, set[int]] = {
+    'X-E4': {
+        0xD198,  # P:SmoothSkin - DevicePropNotSupported
+        0xD1A3,  # P:LongExpNR  - 0x201C
+    },
+}
+def get_skip_props(model: str) -> set[int]:
+    """Return property IDs to skip when writing to *model*."""
+    model_up = model.upper()
+    result: set[int] = set()
+    for key, props in CAMERA_SKIP_PROPS.items():
+        if key.upper() in model_up:
+            result |= props
+    return result
