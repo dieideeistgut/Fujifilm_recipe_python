@@ -180,7 +180,6 @@ def resp_name(code: int) -> str:
 CAMERA_SKIP_PROPS: dict[str, set[int]] = {
     'X-E4': {
         0xD198,  # P:SmoothSkin - DevicePropNotSupported
-        0xD1A3,  # P:LongExpNR  - 0x201C
     },
 }
 def get_skip_props(model: str) -> set[int]:
